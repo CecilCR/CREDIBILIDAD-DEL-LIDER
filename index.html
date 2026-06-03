@@ -7,7 +7,12 @@
     <meta property="og:title" content="Cuestionario de Credibilidad del Líder">
     <meta property="og:description" content="Autoevaluación reflexiva sobre los pilares de la credibilidad personal y liderazgo persuasivo">
     <meta property="og:type" content="sitio-web">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Preconnect para reducir latencia de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
     <style>
         :root {
             --ink: #1a1a2e;
@@ -278,6 +283,7 @@
             margin-bottom: 16px;
             transition: all 0.3s ease;
             animation: fadeSlide 0.4s ease both;
+            contain: content; /* limita repaints a cada tarjeta */
         }
 
         .item:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
@@ -821,6 +827,21 @@
 
         @keyframes barGrow {
             from { width: 0; }
+        }
+
+        /* ─── ACCESIBILIDAD: prefers-reduced-motion ───── */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .total-score-bar,
+            .prc-bar,
+            .pillar-mini-bar {
+                transition: none !important;
+                width: var(--target-width, 0%) !important;
+            }
         }
 
         /* ─── RESPONSIVE ──────────────────────────────── */
