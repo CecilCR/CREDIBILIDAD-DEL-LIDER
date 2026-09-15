@@ -1,18 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuestionario de Credibilidad del Líder</title>
-    <meta property="og:title" content="Cuestionario de Credibilidad del Líder">
+    <title>Autoevaluación reflexiva sobre la credibilidad del líder</title>
+    <meta property="og:title" content="Autoevaluación reflexiva sobre la credibilidad del líder">
     <meta property="og:description" content="Autoevaluación reflexiva sobre los pilares de la credibilidad personal y liderazgo persuasivo">
     <meta property="og:type" content="sitio-web">
-    <!-- Preconnect para reducir latencia de fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --ink: #1a1a2e;
@@ -283,7 +279,6 @@
             margin-bottom: 16px;
             transition: all 0.3s ease;
             animation: fadeSlide 0.4s ease both;
-            contain: content; /* limita repaints a cada tarjeta */
         }
 
         .item:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
@@ -319,25 +314,12 @@
 
         /* ─── ESCALA LIKERT ─────────────────────────────── */
         .scale-wrapper {
+            background: transparent !important;
+            border: 0 !important;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
-        }
-
-        .scale-labels {
-            display: flex;
-            gap: 4px;
-            width: 100%;
-            justify-content: space-between;
-        }
-
-        .scale-label {
-            font-size: 9px;
-            color: var(--muted);
-            text-align: center;
-            width: 40px;
-            line-height: 1.3;
+            gap: 0;
         }
 
         .scale-buttons {
@@ -529,14 +511,7 @@
             width: 0%;
         }
 
-        .total-level-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
+        .total-level-badge { display: none; }
 
         /* ─── PARTES GRID ─────────────────────────────── */
         .parts-results-grid {
@@ -829,21 +804,6 @@
             from { width: 0; }
         }
 
-        /* ─── ACCESIBILIDAD: prefers-reduced-motion ───── */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-            .total-score-bar,
-            .prc-bar,
-            .pillar-mini-bar {
-                transition: none !important;
-                width: var(--target-width, 0%) !important;
-            }
-        }
-
         /* ─── RESPONSIVE ──────────────────────────────── */
         @media (max-width: 680px) {
             .header-top { padding: 14px 20px; }
@@ -865,7 +825,39 @@
 
         /* Hidden class */
         .hidden { display: none !important; }
-    </style>
+    
+/* ===== MEJORA DE LEGIBILIDAD — V2 ===== */
+body { color: #1f2937; }
+.item, .question-card, .card, .result-card { color: #1f2937; }
+.pole-text, .pole-text.pole-right { color: #1f2937 !important; }
+.item-description, .question-text, .instruction, .scale-label, .helper-text { color: #374151 !important; }
+.item { background: #f8fafc !important; border-color: #d1d5db !important; }
+.item-poles { background: #ffffff; border-radius: 10px; }
+.scale-wrapper { background: #f3f4f6 !important; border-color: #d1d5db !important; }
+.scale-btn { color: #1f2937 !important; background: #ffffff !important; border-color: #9ca3af !important; }
+.scale-btn:hover, .scale-btn:focus-visible { color: #111827 !important; background: #e5e7eb !important; }
+/* Mantener visible la respuesta seleccionada: esta regla debe prevalecer sobre la mejora de contraste. */
+.scale-btn.selected { color: #ffffff !important; background: var(--gold) !important; border-color: var(--gold) !important; box-shadow: 0 2px 12px rgba(201,168,76,0.4); transform: scale(1.15); }
+.scale-number { color: #1f2937 !important; }
+.part-description, .part-intro, .part-subtitle { color: #374151 !important; }
+@media (max-width: 680px) { .item { padding: 24px 20px; } .pole-text { font-size: 15px; line-height: 1.55; } }
+
+.reflection-context {
+  margin: 0 0 1.5rem;
+  padding: 1.15rem 1.25rem;
+  border-left: 4px solid var(--gold);
+  background: rgba(201,168,76,0.07);
+  border-radius: 0 10px 10px 0;
+}
+.reflection-context h3 {
+  margin: 0 0 .65rem;
+  font-size: 1.05rem;
+}
+.reflection-context p {
+  margin: .45rem 0;
+  line-height: 1.6;
+}
+</style>
 </head>
 <body>
 
@@ -892,19 +884,19 @@
         <div class="parts-preview">
             <div class="part-chip">
                 <div class="part-chip-icon badge-1">🔷</div>
-                <span><strong style="color:#fff">Parte 1</strong> — Integridad</span>
+                <span><strong style="color:#fff">Parte 1</strong> — Integridad<br><small>Honestidad, coherencia y firmeza en tus valores.</small></span>
             </div>
             <div class="part-chip">
                 <div class="part-chip-icon badge-2">💜</div>
-                <span><strong style="color:#fff">Parte 2</strong> — Intención</span>
+                <span><strong style="color:#fff">Parte 2</strong> — Orientación hacia los demás<br><small>El motivo detrás de tus acciones y tu preocupación por los demás.</small></span>
             </div>
             <div class="part-chip">
                 <div class="part-chip-icon badge-3">🟢</div>
-                <span><strong style="color:#fff">Parte 3</strong> — Capacidades</span>
+                <span><strong style="color:#fff">Parte 3</strong> — Capacidades<br><small>Talentos, conocimientos y aptitudes puestos al servicio de tu trabajo.</small></span>
             </div>
             <div class="part-chip">
                 <div class="part-chip-icon badge-4">🟠</div>
-                <span><strong style="color:#fff">Parte 4</strong> — Resultados</span>
+                <span><strong style="color:#fff">Parte 4</strong> — Resultados<br><small>Tu historial de logros y la forma en que obtienes resultados.</small></span>
             </div>
         </div>
 
@@ -949,142 +941,30 @@
 // ═══════════════════════════════════════════════════════════
 
 const PARTS = [
-    {
-        id: 1,
-        key: 'integridad',
-        name: 'Integridad',
-        subtitle: 'Ser y hacer lo que dices',
-        description: 'Evalúa tu congruencia entre pensamiento, discurso y acción, así como la claridad y defensa de tus valores.',
-        color: 'var(--part1)',
-        badgeClass: 'badge-1',
-        barClass: 'bar-1',
-        accentClass: 'part-1-accent',
-        icon: '🔷',
-        items: [
-            {
-                left: 'A veces encuentro justificación para decir «mentiritas», tergiversar lo que sé o manipular la verdad para obtener los resultados que deseo.',
-                right: 'Soy totalmente honesto en todas mis interacciones con los demás y en todos los niveles.'
-            },
-            {
-                left: 'A veces no hay coincidencia entre lo que pienso y lo que digo, o entre mis acciones y mis valores.',
-                right: 'Lo que digo y lo que hago es lo que realmente pienso y siento; de manera constante hago lo que digo.'
-            },
-            {
-                left: 'No tengo total claridad acerca de mis valores. Me es difícil defender algo cuando otras personas se oponen a ello.',
-                right: 'Tengo claros mis valores y soy valiente al defenderlos.'
-            },
-            {
-                left: 'Es difícil para mí reconocer que otra persona puede tener razón o que hay información adicional que puede obligarme a cambiar de opinión.',
-                right: 'Tengo la mente honestamente abierta a la posibilidad de aprender nuevas ideas que pueden llevarme a replantearme asuntos e incluso redefinir mis valores.'
-            },
-            {
-                left: 'Me cuesta mucho plantearme y lograr metas o compromisos personales.',
-                right: 'Puedo constantemente adquirir compromisos conmigo mismo y con los demás, y cumplir con ellos.'
-            }
-        ]
-    },
-    {
-        id: 2,
-        key: 'intencion',
-        name: 'Intención',
-        subtitle: 'Motivos, agenda y comportamiento',
-        description: 'Examina la genuinidad de tu preocupación por los demás, la claridad de tus motivos y tu orientación hacia el beneficio mutuo.',
-        color: 'var(--part2)',
-        badgeClass: 'badge-2',
-        barClass: 'bar-2',
-        accentClass: 'part-2-accent',
-        icon: '💜',
-        items: [
-            {
-                left: 'No me importa mucho la gente aparte de la que está más cerca de mí. Me es difícil pensar en preocupaciones fuera de mis propios desafíos en la vida.',
-                right: 'Realmente me importa el resto de la gente y me preocupa profundamente el bienestar de los demás.'
-            },
-            {
-                left: 'Yo no pienso mucho en por qué hago lo que hago. En raras ocasiones he tratado de trabajarme en lo profundo para mejorar mis motivos.',
-                right: 'Tengo plena consciencia de mis motivos y los refino para asegurarme de que estoy haciendo las cosas correctas por las razones correctas.'
-            },
-            {
-                left: 'En mis relaciones con los demás normalmente me concentro en conseguir lo que quiero.',
-                right: 'Busco activamente soluciones que propicien una ganancia para todos los involucrados.'
-            },
-            {
-                left: 'Basados en mi propia conducta, la mayor parte de la gente no necesariamente creería que tomo en cuenta sus mejores intereses.',
-                right: 'Los demás pueden ver claramente, por las cosas que hago, que realmente tomo en cuenta sus mejores intereses.'
-            },
-            {
-                left: 'En lo más profundo siento que si alguien más obtiene algo (recursos, oportunidades, crédito), yo no lo obtendré.',
-                right: 'Sinceramente creo que de todo hay más que suficiente.'
-            }
-        ]
-    },
-    {
-        id: 3,
-        key: 'capacidades',
-        name: 'Capacidades',
-        subtitle: 'Talentos, actitudes, habilidades y conocimiento',
-        description: 'Reflexiona sobre el grado en que desarrollas y aplicas tus capacidades para ser genuinamente efectivo en tu trabajo y en tu vida.',
-        color: 'var(--part3)',
-        badgeClass: 'badge-3',
-        barClass: 'bar-3',
-        accentClass: 'part-3-accent',
-        icon: '🟢',
-        items: [
-            {
-                left: 'Siento que realmente no estoy utilizando mis talentos en mi trabajo actual.',
-                right: 'Hay una correspondencia muy estrecha entre mis talentos y mis oportunidades en el trabajo que estoy realizando.'
-            },
-            {
-                left: 'No he adquirido los conocimientos ni desarrollado plenamente las aptitudes que necesito para ser realmente una persona efectiva en el trabajo.',
-                right: 'He adquirido los conocimientos y consolidado las aptitudes que necesito para mi trabajo.'
-            },
-            {
-                left: 'En raras ocasiones me tomo el tiempo para mejorar mis conocimientos y aptitudes en el trabajo o en cualquier otro campo.',
-                right: 'Mejoro incesantemente mis conocimientos y aptitudes en todos los campos importantes de mi vida.'
-            },
-            {
-                left: 'No tengo realmente seguridad acerca de cuáles son mis fortalezas; me concentro más en tratar de remediar mis debilidades.',
-                right: 'He identificado mis fortalezas y concentro mis esfuerzos en utilizarlas de manera efectiva.'
-            },
-            {
-                left: 'A estas alturas realmente no sé mucho acerca de cómo fomentar la confianza en mí mismo/a.',
-                right: 'Sé cómo establecer, hacer crecer, extender y restaurar la confianza efectivamente, y trabajo de manera consciente para que sea así.'
-            }
-        ]
-    },
-    {
-        id: 4,
-        key: 'resultados',
-        name: 'Resultados',
-        subtitle: 'Historial, desempeño y rendición de cuentas',
-        description: 'Evalúa tu capacidad de concretar lo que emprendes, tu proactividad ante lo incierto y tu modo de comunicar lo que has logrado.',
-        color: 'var(--part4)',
-        badgeClass: 'badge-4',
-        barClass: 'bar-4',
-        accentClass: 'part-4-accent',
-        icon: '🟠',
-        items: [
-            {
-                left: 'No tengo un historial muy bueno. Con toda seguridad mi currículo no se destaca.',
-                right: 'Mi historial inspirará claramente en los demás confianza en que yo lograré los resultados deseados.'
-            },
-            {
-                left: 'Concentro mis esfuerzos en hacer lo que se me ha dicho que haga.',
-                right: 'Concentro mis esfuerzos en ofrecer resultados, demostrando proactividad y capacidad para enfrentar lo incierto.'
-            },
-            {
-                left: 'Cuando se trata de referirme a mis antecedentes, o no digo nada (por no querer que suene a presunción), o digo mucho y desilusiono a la gente.',
-                right: 'Puedo transmitir mis antecedentes a los demás de manera apropiada y en una forma que inspira confianza.'
-            },
-            {
-                left: 'A menudo se me queda sin terminar lo que empiezo.',
-                right: 'Con raras excepciones, si empiezo algo lo termino.'
-            },
-            {
-                left: 'No me preocupo tanto acerca de cómo logro los resultados; solo de que los logre.',
-                right: 'De manera constante obtengo resultados en formas que inspiran confianza.'
-            }
-        ]
-    }
+{ id:1,key:'integridad',name:'Integridad',subtitle:'Coherencia entre discurso y acción',description:'Evalúa cómo comunicas, decides, reconoces errores y cumples compromisos.',color:'var(--part1)',badgeClass:'badge-1',barClass:'bar-1',accentClass:'part-1-accent',icon:'🔷',items:[
+{left:'Cuando comunico una decisión difícil, doy información parcial o evito explicar sus razones.',right:'Cuando comunico una decisión difícil, explico las razones relevantes y evito ocultar información que pueda afectar al equipo.'},
+{left:'En ocasiones mis acciones no coinciden con los compromisos que comunico.',right:'Procuro que mis decisiones y acciones sean coherentes con los compromisos y principios que comunico a otras personas.'},
+{left:'Cuando cometo un error que afecta al equipo, tiendo a justificarlo o trasladar la responsabilidad.',right:'Cuando cometo un error que afecta el trabajo de otras personas, lo reconozco y participo en la búsqueda de una solución.'},
+{left:'Me cuesta revisar una decisión cuando alguien presenta argumentos diferentes.',right:'Cuando alguien presenta información o argumentos relevantes, estoy dispuesto a revisar mi posición, aunque inicialmente haya defendido otra decisión.'},
+{left:'A veces dejo compromisos sin seguimiento o aviso demasiado tarde que no podré cumplirlos.',right:'Cuando asumo un compromiso con un equipo o compañero, realizo las acciones necesarias para cumplirlo o comunico oportunamente si debo renegociarlo.'}]},
+{ id:2,key:'intencion',name:'Orientación hacia los demás',subtitle:'Respeto y beneficio mutuo',description:'Evalúa cómo consideras a las personas y orientas tus decisiones hacia soluciones responsables.',color:'var(--part2)',badgeClass:'badge-2',barClass:'bar-2',accentClass:'part-2-accent',icon:'💜',items:[
+{left:'Al tomar una decisión que afecta al equipo, suelo concentrarme principalmente en resolver la situación sin detenerme demasiado en cómo puede influir en sus condiciones de trabajo y necesidades.',right:'Antes de tomar una decisión que afecta al equipo, considero cómo puede influir en sus condiciones de trabajo y necesidades.'},
+{left:'Cuando debo tomar una decisión importante, no siempre reviso si mis motivos personales están influyendo en lo que considero conveniente para el equipo.',right:'Cuando debo tomar una decisión importante, reflexiono sobre mis motivos y distingo el interés del equipo de mi conveniencia personal.'},
+{left:'Cuando existen intereses diferentes, tiendo a priorizar una solución rápida o mi propia posición antes que explorar alternativas que consideren las necesidades de las partes involucradas.',right:'Cuando existen intereses diferentes, procuro construir alternativas que atiendan las necesidades legítimas de las partes involucradas.'},
+{left:'Cuando un integrante del equipo enfrenta una dificultad, suelo limitar mi intervención a escuchar o dar indicaciones, sin traducir siempre ese interés en acciones concretas.',right:'Muestro interés por las dificultades de los integrantes del equipo mediante acciones concretas, no solamente mediante palabras.'},
+{left:'Al comunicar los resultados de un trabajo, puedo centrar la atención en mi propio aporte y no siempre hago visibles las contribuciones de otras personas.',right:'Reconozco las contribuciones de otras personas y evito presentar como propio un resultado producido por el equipo.'}]},
+{ id:3,key:'capacidades',name:'Capacidades',subtitle:'Preparación, aprendizaje y confianza',description:'Reflexiona sobre los conocimientos y habilidades que aplicas para orientar y desarrollar al equipo.',color:'var(--part3)',badgeClass:'badge-3',barClass:'bar-3',accentClass:'part-3-accent',icon:'🟢',items:[
+{left:'No siempre identifico con claridad mis principales fortalezas ni considero cómo utilizarlas para aportar mayor valor al equipo.',right:'Identifico mis principales fortalezas y procuro utilizarlas en las tareas donde pueden aportar mayor valor al equipo.'},
+{left:'Cuando detecto que necesito nuevos conocimientos o habilidades, no siempre destino tiempo o acciones concretas para desarrollarlos.',right:'Busco desarrollar los conocimientos y habilidades que necesito para cumplir adecuadamente mis responsabilidades.'},
+{left:'Después de una experiencia, tiendo a continuar con la siguiente tarea sin revisar sistemáticamente qué funcionó, qué no funcionó o qué podría mejorar.',right:'Después de una experiencia, reviso qué funcionó, qué no funcionó y qué podría hacer mejor en una situación similar.'},
+{left:'Cuando una tarea supera mis conocimientos o experiencia, puedo intentar resolverla por mi cuenta durante demasiado tiempo antes de solicitar apoyo o buscar información.',right:'Cuando una tarea supera mis conocimientos o experiencia, solicito apoyo o busco información para resolverla adecuadamente.'},
+{left:'En situaciones de presión, puedo descuidar el seguimiento de acuerdos, la claridad de la comunicación o mi disponibilidad ante las dificultades del equipo.',right:'Para fortalecer la confianza del equipo, cumplo acuerdos, comunico con claridad y mantengo una actitud disponible ante las dificultades.'}]},
+{ id:4,key:'resultados',name:'Resultados',subtitle:'Iniciativa, seguimiento y responsabilidad',description:'Evalúa cómo conviertes compromisos en acciones y alcanzas objetivos cuidando a las personas.',color:'var(--part4)',badgeClass:'badge-4',barClass:'bar-4',accentClass:'part-4-accent',icon:'🟠',items:[
+{left:'Me resulta difícil presentar ejemplos concretos de tareas, proyectos o compromisos que haya completado y que permitan mostrar cómo cumplo objetivos.',right:'Puedo presentar ejemplos concretos de tareas, proyectos o compromisos que he completado y que muestran mi capacidad para cumplir objetivos.'},
+{left:'Cuando identifico una dificultad u oportunidad, suelo esperar indicaciones antes de proponer acciones, incluso cuando podría anticiparme.',right:'Cuando identifico una dificultad u oportunidad, propongo acciones y no me limito a esperar instrucciones.'},
+{left:'Cuando informo sobre un resultado, puedo centrarme en lo logrado sin precisar siempre mi aporte o los aspectos que aún están pendientes.',right:'Cuando informo sobre un resultado, explico qué se logró, cuál fue mi aporte y qué aspectos siguen pendientes.'},
+{left:'En períodos de alta carga de trabajo, puedo perder el seguimiento de algunas tareas o proyectos y advertir su retraso cuando ya se ha producido.',right:'Organizo mi trabajo y realizo seguimiento para evitar que las tareas o proyectos queden inconclusos sin explicación o acuerdo.'},
+{left:'Cuando existe presión por alcanzar un objetivo, puedo priorizar el resultado inmediato sin valorar suficientemente su impacto en las personas, la calidad del trabajo o la confianza del equipo.',right:'Procuro alcanzar los objetivos sin ignorar el impacto de mis decisiones en las personas, la calidad del trabajo o la confianza del equipo.'}]}
 ];
 
 // ═══════════════════════════════════════════════════════════
@@ -1125,10 +1005,21 @@ function updateProgressDots() {
             (i === currentPart ? ' active' :
              i < currentPart ? ' done' : '');
     });
+
+    // El progreso representa preguntas respondidas, no solamente partes visitadas.
+    const answeredBefore = answers
+        .slice(0, currentPart)
+        .reduce((total, part) => total + part.filter(v => v !== null).length, 0);
+    const answeredCurrent = answers[currentPart]
+        ? answers[currentPart].filter(v => v !== null).length
+        : 0;
+    const answeredTotal = answeredBefore + answeredCurrent;
+    const percentage = (answeredTotal / 20) * 100;
+
     document.getElementById('progress-text').textContent =
-        `Parte ${currentPart + 1} de 4`;
+        `${answeredTotal} de 20 preguntas`;
     document.getElementById('main-progress-fill').style.width =
-        `${(currentPart / 4) * 100}%`;
+        `${percentage}%`;
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1183,13 +1074,8 @@ function renderPart(idx) {
                                 </button>
                             `).join('')}
                         </div>
-                        <div class="scale-labels">
-                            <span class="scale-label" style="color:${part.color};font-size:9px;font-weight:600">1 = polo<br>izquierdo</span>
-                            <span class="scale-label"></span>
-                            <span class="scale-label" style="color:var(--muted);font-size:9px">intermedio</span>
-                            <span class="scale-label"></span>
-                            <span class="scale-label" style="color:${part.color};font-size:9px;font-weight:600">5 = polo<br>derecho</span>
-                        </div>
+                        <!-- La escala se presenta únicamente con los valores 1–5.
+                             Se eliminan etiquetas interpretativas para no sugerir una respuesta intermedia. -->
                     </div>
                     <p class="pole-text pole-right">${item.right}</p>
                 </div>
@@ -1242,6 +1128,8 @@ function selectAnswer(partIdx, itemIdx, value) {
 
     const nextBtn = document.getElementById('next-btn');
     if (nextBtn && count === 5) nextBtn.disabled = false;
+
+    updateProgressDots();
 }
 
 function goToPart(idx) {
@@ -1270,38 +1158,59 @@ function showResults() {
 
     const scores = answers.map(part => part.reduce((s,v) => s + v, 0));
     const total = scores.reduce((s,v) => s + v, 0);
+    const maxScore = Math.max(...scores);
+    const minScore = Math.min(...scores);
+    const maxIndexes = scores.map((s,i) => s === maxScore ? i : -1).filter(i => i !== -1);
+    const minIndexes = scores.map((s,i) => s === minScore ? i : -1).filter(i => i !== -1);
+    const maxNames = maxIndexes.map(i => PARTS[i].name).join(' y ');
+    const minNames = minIndexes.map(i => PARTS[i].name).join(' y ');
+    const spread = maxScore - minScore;
 
-    const { level, description, icon } = getLevel(total);
-    const pillarAnalysis = getPillarAnalysis(scores);
+    let profileReading = '';
+    if (spread === 0) {
+        profileReading = `Las cuatro áreas presentan la misma puntuación (${maxScore}/25). Esto muestra un perfil equilibrado dentro de tus propias respuestas. La reflexión puede centrarse en qué situaciones concretas confirman o contradicen esta percepción.`;
+    } else if (spread <= 3) {
+        profileReading = `Las puntuaciones de los cuatro pilares son relativamente cercanas. ${maxNames} presenta la puntuación más alta (${maxScore}/25) y ${minNames} la más baja (${minScore}/25). Las diferencias son pequeñas, por lo que conviene revisar los ítems concretos antes de extraer conclusiones generales.`;
+    } else {
+        profileReading = `En tu autoevaluación, ${maxNames} presenta la puntuación más alta (${maxScore}/25), mientras que ${minNames} presenta la más baja (${minScore}/25). Esta diferencia puede servir como punto de partida para revisar qué conductas concretas explican la distancia entre ambas áreas.`;
+    }
 
     const resultsDiv = document.getElementById('results');
     resultsDiv.style.display = 'block';
 
     resultsDiv.innerHTML = `
-        <div class="results-header">
-            <div class="results-crown">${icon}</div>
-            <h2 class="results-title">Tu perfil de credibilidad</h2>
+        <div class="reflection-context">
+  <h3>¿Qué significa este resultado para tu liderazgo?</h3>
+  <p>La credibilidad es una de las bases desde las que se ejerce la influencia en el liderazgo: se construye cuando existe coherencia entre lo que comunicamos, hacemos y logramos.</p>
+  <p>Este resultado no califica ni diagnostica; ofrece un punto de partida para reflexionar sobre las conductas que pueden fortalecer o limitar nuestra capacidad de influir.</p>
+</div>
+
+<div class="results-header">
+            <div class="results-crown">◎</div>
+            <h2 class="results-title">Tu perfil de autoevaluación</h2>
             <p class="results-subtitle">
-                Estos resultados son para tu reflexión personal. 
-                No hay respuestas correctas ni incorrectas: 
-                son el punto de partida para tu desarrollo.
+                El resultado organiza tus respuestas en los cuatro pilares de la credibilidad. 
+                Su finalidad es facilitar la reflexión sobre tus propias percepciones; no constituye 
+                una calificación, un diagnóstico psicológico ni una medida validada de liderazgo.
             </p>
         </div>
 
-        <!-- SCORE TOTAL -->
+        <!-- REFERENCIA GLOBAL -->
         <div class="total-score-card">
-            <p class="total-score-label">Puntaje total</p>
+            <p class="total-score-label">Puntaje global de referencia</p>
             <div class="total-score-number" id="total-anim">0</div>
-            <p class="total-score-max">de 100 puntos posibles</p>
-            <div class="total-score-bar-bg">
+            <p class="total-score-max">de 100 puntos posibles · 20 ítems respondidos</p>
+            <div class="total-score-bar-bg" aria-hidden="true">
                 <div class="total-score-bar" id="total-bar" style="width:0%"></div>
             </div>
-            <span class="total-level-badge" style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3)">
-                ${level}
-            </span>
+            <p style="max-width:520px;margin:18px auto 0;color:rgba(255,255,255,0.62);font-size:13px;line-height:1.6">
+                Tus respuestas ofrecen una referencia para reflexionar sobre cómo ejercitas la credibilidad en el liderazgo. El puntaje global permite sintetizar esa percepción. Para profundizar en el resultado, observa también cómo se distribuyen tus puntuaciones entre los cuatro pilares y qué conductas concretas destacan en cada uno.<br><br>
+                <strong>¿Cómo puedes leer tu resultado?</strong><br>
+                Por ejemplo, si tus resultados son: Integridad 18/25; Orientación hacia los demás 18/25; Capacidades 16/25 y Resultados 19/25, el resultado te invita a observar cómo se distribuyen tus puntuaciones entre los cuatro pilares, qué situaciones concretas pueden estar influyendo en esas diferencias y qué conductas podrías revisar o fortalecer.
+            </p>
         </div>
 
-        <!-- PARTES -->
+        <!-- PERFIL POR PILARES -->
         <div class="parts-results-grid">
             ${PARTS.map((part, i) => `
                 <div class="part-result-card">
@@ -1314,32 +1223,32 @@ function showResults() {
                         </div>
                         <p class="prc-score ${part.accentClass}">${scores[i]}</p>
                     </div>
-                    <div class="prc-bar-bg">
+                    <div class="prc-bar-bg" aria-hidden="true">
                         <div class="prc-bar ${part.barClass}" id="pbar-${i}" style="width:0%"></div>
                     </div>
                     <p class="prc-level" style="color:${part.color}">
-                        ${getPartLevel(scores[i])} · ${scores[i]}/25 puntos
+                        ${scores[i]}/25 puntos en los cinco ítems del pilar
                     </p>
                 </div>
             `).join('')}
         </div>
 
-        <!-- INTERPRETACIÓN -->
+        <!-- LECTURA DEL PERFIL -->
         <div class="interpretation-card">
-            <p class="ic-label">Interpretación global</p>
-            <p class="ic-level-name">${level}</p>
-            <p class="ic-description">${description}</p>
+            <p class="ic-label">Lectura del perfil</p>
+            <p class="ic-level-name">Lo que muestran tus respuestas</p>
+            <p class="ic-description">${profileReading}</p>
 
             <div class="ic-pillar-analysis">
-                <p class="ica-title">Análisis por pilar</p>
-                ${pillarAnalysis.map((p, i) => `
+                <p class="ica-title">Distribución de las puntuaciones</p>
+                ${PARTS.map((part, i) => `
                     <div class="pillar-row">
                         <span class="pillar-name">${PARTS[i].name}</span>
-                        <div class="pillar-mini-bar-bg">
+                        <div class="pillar-mini-bar-bg" aria-hidden="true">
                             <div class="pillar-mini-bar ${PARTS[i].barClass}"
                                 id="minibar-${i}" style="width:0%"></div>
                         </div>
-                        <span class="pillar-pct" style="color:${PARTS[i].color}">${p.pct}%</span>
+                        <span class="pillar-pct" style="color:${PARTS[i].color}">${scores[i]}/25</span>
                     </div>
                 `).join('')}
             </div>
@@ -1349,11 +1258,11 @@ function showResults() {
         <div class="reflexion-section">
             <h3 class="rs-title">Preguntas para la reflexión</h3>
             <ul class="rs-questions">
-                <li>¿Cuál de los cuatro pilares representa tu mayor fortaleza como líder? ¿Qué comportamientos concretos la demuestran?</li>
-                <li>¿En qué pilar identificas la mayor brecha entre dónde estás y dónde quisieras estar?</li>
-                <li>Piensa en alguien que consideras un líder muy creíble. ¿Qué pilares destacan claramente en esa persona?</li>
-                <li>¿Hay algún ítem específico que te generó incomodidad al responder? ¿Qué te dice eso sobre ti?</li>
-                <li>¿Qué una acción concreta podrías iniciar esta semana para fortalecer el pilar donde te sientes más débil?</li>
+                <li>¿Qué situaciones concretas recuerdas que respaldan las respuestas que diste en el pilar con mayor puntuación?</li>
+                <li>¿Qué situaciones podrían explicar la menor puntuación obtenida en el pilar con menor puntuación?</li>
+                <li>¿Existe algún ítem en el que tu respuesta no coincida con la manera en que otras personas podrían describir tu conducta?</li>
+                <li>¿Qué conducta concreta te gustaría mantener, reforzar o modificar a partir de este ejercicio?</li>
+                <li>¿Qué acción específica podrías realizar esta semana para observar esa conducta en una situación real?</li>
             </ul>
         </div>
 
@@ -1381,13 +1290,10 @@ function showResults() {
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Animaciones con delay
     setTimeout(() => {
-        // Contador total animado
         animateCounter('total-anim', 0, total, 1200);
         document.getElementById('total-bar').style.width = `${total}%`;
 
-        // Barras por parte
         PARTS.forEach((_, i) => {
             setTimeout(() => {
                 const pct = (scores[i] / 25) * 100;
